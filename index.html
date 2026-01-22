@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SSH Session</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Courier New', monospace;
+        }
+        
+        body {
+            background: #000;
+            color: #ccc;
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .terminal {
+            background: rgba(20, 20, 20, 0.9);
+            border-radius: 8px;
+            padding: 25px;
+            width: 100%;
+            max-width: 700px;
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.1);
+            border: 1px solid rgba(64, 224, 208, 0.3);
+        }
+        
+        .header {
+            color: #40e0d0;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #40e0d0;
+            font-size: 1.2em;
+        }
+        
+        .prompt {
+            color: #40e0d0;
+            margin-right: 10px;
+        }
+        
+        .command {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .output {
+            margin-left: 30px;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+        
+        a {
+            color: #40e0d0;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+        
+        a:hover {
+            color: #fff;
+            text-shadow: 0 0 8px #40e0d0;
+        }
+        
+        .links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .link-item {
+            padding: 8px;
+            background: rgba(64, 224, 208, 0.1);
+            border-radius: 4px;
+            text-align: center;
+        }
+        
+        .player-section {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(64, 224, 208, 0.2);
+            border-radius: 6px;
+            padding: 15px;
+            margin: 25px 0;
+        }
+        
+        .player-header {
+            color: #40e0d0;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .player-header i {
+            font-size: 1.2em;
+        }
+        
+        .player-controls {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .player-btn {
+            background: rgba(64, 224, 208, 0.2);
+            border: none;
+            color: #40e0d0;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: 0.3s;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+        
+        .player-btn:hover {
+            background: rgba(64, 224, 208, 0.4);
+            color: #fff;
+        }
+        
+        .track-info {
+            margin-top: 15px;
+            padding-top: 10px;
+            border-top: 1px solid rgba(64, 224, 208, 0.2);
+            font-size: 0.9em;
+        }
+        
+        .track-title {
+            color: #40e0d0;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .volume-control {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .volume-slider {
+            width: 100px;
+            accent-color: #40e0d0;
+        }
+        
+        .blink {
+            animation: blink 1s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+        
+        .instructions {
+            background: rgba(64, 224, 208, 0.1);
+            border-radius: 4px;
+            padding: 15px;
+            margin-top: 20px;
+            font-size: 0.85em;
+            border-left: 3px solid #40e0d0;
+        }
+        
+        .instructions h4 {
+            color: #40e0d0;
+            margin-bottom: 8px;
+        }
+        
+        code {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 2px 6px;
+            border-radius: 3px;
+            color: #ff6b6b;
+        }
+    </style>
+    <!-- Иконки для музыкального плеера -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="terminal">
+        <div class="header">
+            zdvonix@172.0.0.1:~$ cat about_me.txt
+        </div>
+        
+        <div class="command">
+            <span class="prompt">$</span> whoami
+        </div>
+        <div class="output">
+            Zdvonix | Developer and cool Gamer
+        </div>
+        
+        <div class="command">
+            <span class="prompt">$</span> ls -la links/
+        </div>
+        <div class="links">
+            <div class="link-item">
+                <a href="https://t.me/zdv0nix" target="_blank">Telegram</a>
+            </div>
+            <div class="link-item">
+                <a href="https://github.com/zdvonix" target="_blank">GitHub</a>
+            </div>
+            <div class="link-item">
+                <a href="https://steamcommunity.com/id/zdvonix" target="_blank">Steam Main</a>
+            </div>
+            <div class="link-item">
+                <a href="https://steamcommunity.com/id/Zdvon1x" target="_blank">Steam Alt</a>
+            </div>
+        </div>
+        
+        <div class="player-section">
+            <div class="player-header">
+                <i class="fas fa-music"></i>
+                zdvonix@172.0.0.1:~$ ./music_player.sh
+            </div>
+            
+            <div class="player-controls">
+                <button class="player-btn" onclick="playTrack('track1')">
+                    <i class="fas fa-play"></i> Resonance x Magnolia
+                </button>
+                <button class="player-btn" onclick="playTrack('track2')">
+                    <i class="fas fa-play"></i> Tragedy in Memphis (Slowed)
+                </button>
+                <button class="player-btn" onclick="playTrack('track3')">
+                    <i class="fas fa-play"></i> Tragic Freestyle 2 (slowed)
+                    </button>
+                <button class="player-btn" onclick="playTrack('track4')">
+                    <i class="fas fa-play"></i> Dying Light OST
+                </button>
+                <button class="player-btn" onclick="pauseMusic()">
+                    <i class="fas fa-pause"></i> Pause
+                </button>
+                <button class="player-btn" onclick="stopMusic()">
+                    <i class="fas fa-stop"></i> Cancel
+                </button>
+            </div>
+            
+            <div class="volume-control">
+                <i class="fas fa-volume-up" style="color: #40e0d0;"></i>
+                <input type="range" min="0" max="1" step="0.1" value="0.5" 
+                       class="volume-slider" id="volumeSlider" onchange="changeVolume(this.value)">
+            </div>
+            
+            <div class="track-info">
+                <div class="track-title" id="currentTrack">Not playing</div>
+                <div id="trackStatus">Ready to play</div>
+            </div>
+        </div>
+        
+        <div class="command">
+            <span class="prompt">$</span> cat about.txt
+        </div>
+        <div class="output">
+            I love games and coding and hate linux but I'm still using it cuz i can.<br>
+            Using C++, python, reverse engineering.<br>
+            Add me and maybe I'll add u back
+        </div>
+        
+        <div class="instructions">
+            <p>I made this website for fun</p>
+            <p>My list of fav games</p>
+            <p>• Hacknet</p>
+            <p>• Dying Light 1/2</p>
+            <p>• Payday 2</p>
+            <p>• Phasmophobia</p>
+            <p>• Satisfactory</p>
+            <p>• Helldivers 2</p>
+            <p>And a few others</p>
+            <br>
+            <p>Now get out of here</p>
+        </div>
+        
+        <div class="command">
+            
+            <span class="prompt">$</span> <span class="blink">█</span>
+        </div>
+    </div>
+
+    <script>
+        
+        let currentAudio = null;
+        let currentTrackId = null;
+        
+        
+        const tracks = [
+            {
+                id: 'track1',
+                name: 'Resonance x Magnolia',
+                url: 'Resonance.mp3'
+            },
+            {
+                id: 'track2', 
+                name: 'Tragedy in Memphis (slowed)',
+                url: 'Memphis.mp3'
+            },
+            {
+                id: 'track3',
+                name: 'Tragic Freestyle 2 (slowed)',
+                url: 'Freestyle.mp3'
+            },
+            {
+                id: 'track4',
+                name: 'Dying Light OST',
+                url: 'DL.mp3'
+            }
+            
+        ];
+        
+        
+        function playTrack(trackId) {
+            
+            if (currentAudio) {
+                currentAudio.pause();
+            }
+            
+            
+            const track = tracks.find(t => t.id === trackId);
+            if (!track) {
+                updateTrackInfo('Soundtrack not found', 'Error');
+                return;
+            }
+            
+            
+            currentAudio = new Audio(track.url);
+            currentTrackId = trackId;
+            
+            
+            currentAudio.volume = document.getElementById('volumeSlider').value;
+            
+          
+            updateTrackInfo(track.name, 'Playing');
+            
+          
+            currentAudio.play()
+                .then(() => {
+                    updateTrackInfo(track.name, 'Playing');
+                })
+                .catch(error => {
+                    updateTrackInfo(track.name, 'Error loading soundtrack');
+                    console.error('error', error);
+                });
+            
+           
+            currentAudio.onended = () => {
+                updateTrackInfo(track.name, 'wow you really listened');
+                currentAudio = null;
+                currentTrackId = null;
+            };
+        }
+        
+    
+        function pauseMusic() {
+            if (currentAudio && !currentAudio.paused) {
+                currentAudio.pause();
+                const track = tracks.find(t => t.id === currentTrackId);
+                if (track) {
+                    updateTrackInfo(track.name, 'Pause');
+                }
+            }
+        }
+        
+        
+        function stopMusic() {
+            if (currentAudio) {
+                currentAudio.pause();
+                currentAudio.currentTime = 0;
+                currentAudio = null;
+                currentTrackId = null;
+                updateTrackInfo('Not playing', 'Canceled');
+            }
+        }
+        
+        
+        function changeVolume(value) {
+            if (currentAudio) {
+                currentAudio.volume = value;
+            }
+        }
+        
+       
+        function updateTrackInfo(name, status) {
+            document.getElementById('currentTrack').textContent = name;
+            document.getElementById('trackStatus').textContent = status;
+        }
+        
+        document.addEventListener('DOMContentLoaded', function() {
+        // playTrack('track1');
+         });
+    </script>
+</body>
+</html>
