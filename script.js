@@ -17,7 +17,7 @@
         });
     }
 
-    // Клик по оверлею - запускает музыку и убирает оверлей
+    
     overlay.addEventListener('click', function() {
         overlay.style.opacity = '0';
         setTimeout(() => {
