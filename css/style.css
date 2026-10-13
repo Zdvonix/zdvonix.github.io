@@ -226,7 +226,7 @@ body {
   display: flex;
   align-items: center;
   gap: 8px;
-  color: #ffffff;
+  color: #1599ad;
   font-size: 22px;
   font-weight: 600;
   text-shadow: var(--username-glow, none);
