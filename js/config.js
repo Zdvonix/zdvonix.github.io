@@ -33,15 +33,10 @@ const CONFIG = {
   // BADGES / ROLES
   // Add, remove or reorder. "icon" = path inside assets/badges/
   // ----------------------------------------------------------
-  badges: [
-    { icon: "",    label: ""    },
-    { icon: "", label: "" },
-    { icon: "",  label: ""  },
-    { icon: "",     label: ""     },
-  ],
+  badges: [],
   badgeSize:                "22px",
-  badgeContainerBackground: "rgba(172, 200, 255, 0.08)",
-  badgeContainerBorder:     "2px solid rgba(172, 200, 255, 0.04)",
+  badgeContainerBackground: "rgba(255, 255, 255, 0.00)",
+  badgeContainerBorder:     "2px solid rgba(255, 255, 255, 0.00)",
 
   // ----------------------------------------------------------
   // DISCORD (static — no API, edit manually)
@@ -67,14 +62,14 @@ const CONFIG = {
   ],
   iconSize:         "36px",
   iconBorderRadius: "8px",
-  iconGlowColor:    "#ffd1d1",
+  iconGlowColor:    "#ffffff",
 
   // ----------------------------------------------------------
   // CARD
   // ----------------------------------------------------------
   cardMaxWidth:        "44rem",
   cardBorderRadius:    "85px",
-  cardBackground:      "rgba(200, 27, 27, 0.03)",
+  cardBackground:      "rgba(255, 255, 255, 0.03)",
   cardBorder:          "none",
   cardRevealDelay:     300,        // ms between entry click and card appearance
   cardTiltIntensity:   15,         // tilt degrees on mouse move (0 = disabled)
@@ -90,12 +85,12 @@ const CONFIG = {
   // ----------------------------------------------------------
   // COLORS / STYLE
   // ----------------------------------------------------------
-  usernameGlow: "0 0 16.5px #fcf7f7", // name glow ("none" to disable)
+  usernameGlow: "0 0 16.5px #ffffff", // name glow ("none" to disable)
 
   // ----------------------------------------------------------
   // BACKGROUND PARTICLES
   // ----------------------------------------------------------
-  particleColor:            "#b31f1f",
+  particleColor:            "#fffffff",
   particleCount:            70,
   particleFallDuration:     15,    // seconds to cross the screen top to bottom
   particleSwayDuration:     3,     // seconds per horizontal sway cycle
