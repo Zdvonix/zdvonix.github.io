@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Profile</title>
+    <link rel="icon" href="assets/favicon.png" />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+
+    <!-- Entry screen — first thing visible on load -->
+    <div id="entry-screen">
+      <div id="entry-symbol"></div>
+    </div>
+
+    <div id="main-content">
+
+      <!-- Hidden SVG filter for the name interference effect.
+           JS changes the seed every 40ms to animate it. -->
+      <svg style="display:none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <filter id="name-filter" x="-10%" y="-20%" width="120%" height="140%">
+            <feTurbulence id="name-turb" type="turbulence"
+              baseFrequency="0.008 1.1" numOctaves="1" seed="1" result="noise" />
+            <feDisplacementMap id="name-disp"
+              in="SourceGraphic" in2="noise" scale="6"
+              xChannelSelector="R" yChannelSelector="G" />
+          </filter>
+        </defs>
+      </svg>
+
+      <!-- Background video — starts (with audio) on entry click -->
+      <video id="bg-video" muted loop playsinline>
+        <source id="bg-video-source" src="" type="video/mp4" />
+      </video>
+
+      <!-- Background particles canvas -->
+      <canvas id="bg-canvas"></canvas>
+
+      <!-- Volume toggle button -->
+      <button id="volume-btn" aria-label="Toggle sound">🔊</button>
+
+      <!-- Profile card -->
+      <div id="profile-card">
+
+        <!-- Section 1: avatar + name + status -->
+        <div id="profile-main">
+          <div id="avatar-wrapper">
+            <img id="avatar" src="" alt="avatar" />
+            <img id="avatar-decoration" src="" alt="" />
+          </div>
+          <div id="profile-info">
+            <div id="profile-name">
+              <div id="name-row">
+                <div class="name-wrapper">
+                  <span id="name-text"></span>
+                  <span class="name-tooltip" id="name-tooltip"></span>
+                </div>
+                <div id="badges"></div>
+              </div>
+            </div>
+            <p id="profile-status"></p>
+          </div>
+        </div>
+
+        <!-- Section 2: Discord presence (static, edit in config.js) -->
+        <div id="discord-presence">
+          <div id="discord-avatar-wrapper">
+            <img id="discord-avatar" src="" alt="discord avatar" />
+            <img id="discord-status-icon" src="" alt="" />
+          </div>
+          <div id="discord-info">
+            <span id="discord-username"></span>
+            <span id="discord-activity"></span>
+          </div>
+        </div>
+
+        <!-- Section 3: social links (generated from config.js) -->
+        <div id="social-links"></div>
+
+      </div>
+
+    </div>
+
+    <!-- Cursor sparkle trail canvas — above everything -->
+    <canvas id="cursor-canvas"></canvas>
+
+    <!-- config.js must load before script.js -->
+    <script src="js/config.js"></script>
+    <script src="js/script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,473 @@
+/* ============================================================
+   style.css — visual styles
+   Colors, sizes and effects are controlled via config.js
+   ============================================================ */
+
+
+/* ============================================================
+   CUSTOM FONT
+   Place your font file at assets/fonts/fuente.otf
+   If the file doesn't exist, the page falls back to sans-serif.
+   See assets/fonts/README.md for .ttf / .woff2 instructions.
+   ============================================================ */
+@font-face {
+  font-family: "CustomFont";
+  src: url("../assets/fonts/fuente.otf") format("opentype");
+  font-display: swap;
+}
+
+
+/* ============================================================
+   RESET
+   ============================================================ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "CustomFont", sans-serif;
+  background-color: #080808;
+  overflow: hidden;
+  height: 100vh;
+}
+
+
+/* ============================================================
+   ENTRY SCREEN
+   Blurred overlay shown before the user clicks to enter.
+   JS adds the .hidden class on click to fade it out.
+   ============================================================ */
+#entry-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(8, 8, 8, 0.55);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+
+  cursor: pointer;
+  transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+
+#entry-screen.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+#entry-symbol {
+  font-size: 50px;
+  color: #ffffff;
+  text-shadow: 0 0 15px #acc8ff, 0 0 30px #0011ff;
+  animation: pulse 2s infinite ease-in-out;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.6; transform: scale(1);    }
+  50%       { opacity: 1;   transform: scale(1.15); }
+}
+
+
+/* ============================================================
+   BACKGROUND LAYERS
+   ============================================================ */
+#main-content {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+}
+
+/* Full-screen video behind everything */
+#bg-video {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+
+/* Particle canvas — sits above the video, behind the card */
+#bg-canvas {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Cursor trail canvas — sits above everything, never blocks clicks */
+#cursor-canvas {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  pointer-events: none;
+}
+
+
+/* ============================================================
+   VOLUME BUTTON
+   ============================================================ */
+#volume-btn {
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  z-index: 5;
+
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px solid rgba(172, 200, 255, 0.15);
+  background: rgba(172, 200, 255, 0.08);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  color: #acc8ff;
+  transition: background 0.2s ease;
+}
+
+#volume-btn:hover {
+  background: rgba(172, 200, 255, 0.18);
+}
+
+
+/* ============================================================
+   PROFILE CARD
+   The card shape (background, corners) is always visible.
+   Only its children animate in after the entry click.
+   ============================================================ */
+#profile-card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  letter-spacing: 1.5px;
+
+  width: min(92%, var(--card-max-width, 380px));
+  padding: 26px;
+
+  background: var(--card-background, rgba(200, 27, 27, 0.03));
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+
+  border: var(--card-border, none);
+  border-radius: var(--card-border-radius, 85px);
+
+  transform: translate(-50%, -50%) perspective(var(--card-tilt-perspective, 1000px)) rotateX(0deg) rotateY(0deg);
+  transition: transform 700ms cubic-bezier(0.03, 0.98, 0.52, 0.99);
+  will-change: transform;
+}
+
+/* Card reveal — sections animate in one by one after entry click */
+@keyframes unfold {
+  from { opacity: 0; transform: translateY(-26px); }
+  to   { opacity: 1; transform: translateY(0);     }
+}
+
+#profile-card > * { opacity: 0; }
+
+#profile-card.revealed > * {
+  animation: unfold 0.7s cubic-bezier(0.2, 0.72, 0.12, 1) both;
+}
+
+#profile-card.revealed > *:nth-child(1) { animation-delay: 0ms;    }
+#profile-card.revealed > *:nth-child(2) { animation-delay: 700ms;  }
+#profile-card.revealed > *:nth-child(3) { animation-delay: 1400ms; }
+
+
+/* ============================================================
+   PROFILE MAIN — avatar + name + status
+   ============================================================ */
+#profile-main {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* Avatar */
+#avatar-wrapper {
+  position: relative;
+  width: var(--avatar-size, 70px);
+  height: var(--avatar-size, 70px);
+  flex-shrink: 0;
+}
+
+#avatar {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(249, 184, 184, 0.3);
+}
+
+/* Discord-style animated decoration ring — larger than the avatar */
+#avatar-decoration {
+  position: absolute;
+  inset: -15%;
+  width: 130%;
+  height: 130%;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+/* Name row — name span + badges side by side */
+#profile-name {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #acc8ff;
+  font-size: 22px;
+  font-weight: 600;
+  text-shadow: var(--username-glow, none);
+  flex-wrap: wrap;
+}
+
+#name-row {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+/* Name wrapper — auto-sized so it doesn't interfere with badges */
+.name-wrapper {
+  position: relative;
+  width: auto;
+  height: auto;
+  display: flex;
+  justify-content: flex-start;
+  overflow: visible;
+}
+
+/* Name span — SVG interference filter applied directly here */
+#name-text {
+  display: inline-block;
+  width: 86px;
+  height: 32px;
+  line-height: 32px;
+  white-space: nowrap;
+  overflow: visible;
+  color: #acc8ff;
+  font-size: 30px;
+  font-weight: 600;
+  text-shadow: var(--username-glow, none);
+  filter: url(#name-filter);
+}
+
+/* Name tooltip — appears above on hover */
+.name-tooltip {
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  background: rgba(10, 10, 15, 0.82);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid rgba(172, 200, 255, 0.12);
+  border-radius: 6px;
+  padding: 4px 8px;
+  white-space: nowrap;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  color: #acc8ff;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+  z-index: 99;
+}
+
+.name-wrapper:hover .name-tooltip {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Badges */
+#badges {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5.5px;
+  padding: 6px 10px;
+  border-radius: 25px;
+  background: var(--badge-container-bg, rgba(172, 200, 255, 0.08));
+  border: var(--badge-container-border, 2px solid rgba(172, 200, 255, 0.04));
+}
+
+.badge-item {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.badge-item img {
+  width: var(--badge-size, 22px);
+  height: var(--badge-size, 22px);
+  object-fit: contain;
+  display: block;
+  transition: transform 0.15s ease;
+}
+
+.badge-item:hover img { transform: scale(1.2); }
+
+/* Badge tooltip */
+.badge-item .badge-tooltip {
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  background: rgba(10, 10, 15, 0.82);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid rgba(172, 200, 255, 0.12);
+  border-radius: 6px;
+  padding: 4px 8px;
+  white-space: nowrap;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  color: #acc8ff;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+  z-index: 99;
+}
+
+.badge-item:hover .badge-tooltip {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Status text — typewriter effect (cursor "|" added via ::after) */
+#profile-status {
+  margin-top: 4px;
+  min-height: 18px;
+  color: rgba(172, 200, 255, 0.7);
+  font-weight: 570;
+  font-size: 17px;
+}
+
+@keyframes blink-cursor {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+#profile-status::after {
+  content: "|";
+  display: inline-block;
+  margin-left: 2px;
+  color: rgba(172, 200, 255, 0.8);
+  animation: blink-cursor 0.8s infinite;
+}
+
+
+/* ============================================================
+   DISCORD PRESENCE BOX
+   ============================================================ */
+#discord-presence {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background: var(--discord-box-background, rgba(255, 255, 255, 0.05));
+  border: var(--discord-box-border, none);
+  border-radius: var(--discord-box-radius, 30px);
+}
+
+/* Avatar with status icon overlay */
+#discord-avatar-wrapper {
+  position: relative;
+  flex-shrink: 0;
+}
+
+#discord-avatar {
+  width: var(--discord-avatar-size, 36px);
+  height: var(--discord-avatar-size, 36px);
+  border-radius: 50%;
+  object-fit: cover;
+  border: var(--discord-avatar-border, 2px solid rgba(249, 184, 184, 0.2));
+  display: block;
+}
+
+/* Status icon (online / idle / dnd / offline) — bottom-right corner */
+#discord-status-icon {
+  position: absolute;
+  bottom: 4px;
+  right: 4px;
+  width: 17px;
+  height: 17px;
+  object-fit: cover;
+}
+
+#discord-info {
+  display: flex;
+  flex-direction: column;
+  font-size: 12px;
+  line-height: 1.4;
+  overflow: hidden;
+}
+
+#discord-username {
+  color: #acc8ff;
+  font-weight: 550;
+  font-size: 18.5px;
+}
+
+#discord-activity {
+  color: rgba(172, 200, 255, 0.6);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 13.5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+/* ============================================================
+   SOCIAL LINKS
+   ============================================================ */
+#social-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+  margin-top: 14px;
+  min-height: 28px;
+}
+
+#social-links a {
+  display: flex;
+  color: inherit;
+  text-decoration: none;
+  opacity: 0.75;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+#social-links a:hover {
+  opacity: 1;
+  transform: translateY(-2px);
+}
+
+/* drop-shadow follows the icon's real silhouette (transparent background) */
+.social-icon {
+  display: block;
+  width: var(--icon-size, 32px);
+  height: var(--icon-size, 32px);
+  object-fit: contain;
+  border-radius: var(--icon-border-radius, 0);
+  filter: drop-shadow(var(--icon-glow-color) 1px 0 7px);
+  transition: transform 0.2s ease;
+}
+
+.social-icon:hover { transform: scale(1.15); }
