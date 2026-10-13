@@ -9,7 +9,7 @@ const CONFIG = {
   // ----------------------------------------------------------
   profileName:   "𝚣𝚍𝚟ø𝚗𝚒𝚡",      // name shown on the card
   nameTooltip:   "curiosity killed the cat",         // tooltip on hover over the name
-  nameEffect:    "noise",         // "noise" = TV interference | "none" = plain text
+  nameEffect:    "none",         // "noise" = TV interference | "none" = plain text
   statusText:    "What joy is this to tinker on these machines to my hearts content...", // text below the name (typewriter effect)
   tabTitle:      "{ 𝚣𝚍𝚟ø𝚗𝚒𝚡 }",      // animated browser tab title
   entrySymbol:   "⍉",            // symbol shown on the entry screen
