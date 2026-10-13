@@ -10,7 +10,7 @@ const CONFIG = {
   profileName:   "𝚣𝚍𝚟ø𝚗𝚒𝚡",      // name shown on the card
   nameTooltip:   "curiosity killed the cat",         // tooltip on hover over the name
   nameEffect:    "noise",         // "noise" = TV interference | "none" = plain text
-  statusText:    "Access is a mindset, not a permission", // text below the name (typewriter effect)
+  statusText:    "What joy is this to tinker on these machines to my hearts content...", // text below the name (typewriter effect)
   tabTitle:      "{ 𝚣𝚍𝚟ø𝚗𝚒𝚡 }",      // animated browser tab title
   entrySymbol:   "⍉",            // symbol shown on the entry screen
 
@@ -41,13 +41,13 @@ const CONFIG = {
   // ----------------------------------------------------------
   // DISCORD (static — no API, edit manually)
   // ----------------------------------------------------------
-  discordUsername: "Zdvonix",
-  discordStatus:   "Every lock is just a question waiting for the right answers",
+  discordUsername: "This is a dellusion",
+  discordStatus:   "Is this a dellusion? Shit, I'm a schizo",
   discordAvatar:   "assets/discord-avatar.jpg",
   discordAvatarSize:   "74px",
   discordAvatarBorder: "2px solid rgba(255, 255, 255, 0.15)",
   // status: "online" | "idle" | "dnd" | "offline"
-  discordPresenceStatus: "online",
+  discordPresenceStatus: "dnd",
 
   // ----------------------------------------------------------
   // SOCIAL LINKS
