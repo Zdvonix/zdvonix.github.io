@@ -12,7 +12,7 @@
    ============================================================ */
 @font-face {
   font-family: "CustomFont";
-  src: url("../assets/fonts/fuente.otf") format("opentype");
+  src: url("../assets/fonts/Arvo-Regular.ttf") format("truetype");
   font-display: swap;
 }
 
