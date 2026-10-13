@@ -7,11 +7,11 @@ const CONFIG = {
   // ----------------------------------------------------------
   // PROFILE
   // ----------------------------------------------------------
-  profileName:   "{ 𝚣𝚍𝚟ø𝚗𝚒𝚡 }",      // name shown on the card
-  nameTooltip:   "?",         // tooltip on hover over the name
+  profileName:   "𝚣𝚍𝚟ø𝚗𝚒𝚡",      // name shown on the card
+  nameTooltip:   "curiosity killed the cat",         // tooltip on hover over the name
   nameEffect:    "noise",         // "noise" = TV interference | "none" = plain text
   statusText:    "Access is a mindset, not a permission", // text below the name (typewriter effect)
-  tabTitle:      "zdvonix",      // animated browser tab title
+  tabTitle:      "{ 𝚣𝚍𝚟ø𝚗𝚒𝚡 }",      // animated browser tab title
   entrySymbol:   "⍉",            // symbol shown on the entry screen
 
   // ----------------------------------------------------------
@@ -42,7 +42,7 @@ const CONFIG = {
   // DISCORD (static — no API, edit manually)
   // ----------------------------------------------------------
   discordUsername: "Zdvonix",
-  discordStatus:   "",
+  discordStatus:   "Every lock is just a question waiting for the right answers",
   discordAvatar:   "assets/discord-avatar.jpg",
   discordAvatarSize:   "74px",
   discordAvatarBorder: "2px solid rgba(255, 255, 255, 0.15)",
@@ -78,9 +78,9 @@ const CONFIG = {
   // ----------------------------------------------------------
   // DISCORD BOX (presence box inside the card)
   // ----------------------------------------------------------
-  discordBoxBackground: "rgba(172, 200, 255, 0.07)",
+  discordBoxBackground: "rgba(255, 255, 255, 0.07)",
   discordBoxRadius:     "14px",
-  discordBoxBorder:     "2px solid rgba(172, 200, 255, 0.05)",
+  discordBoxBorder:     "2px solid rgba(255, 255, 255, 0.05)",
 
   // ----------------------------------------------------------
   // COLORS / STYLE
@@ -90,7 +90,7 @@ const CONFIG = {
   // ----------------------------------------------------------
   // BACKGROUND PARTICLES
   // ----------------------------------------------------------
-  particleColor:            "#fffffff",
+  particleColor:            "#ffffff",
   particleCount:            70,
   particleFallDuration:     15,    // seconds to cross the screen top to bottom
   particleSwayDuration:     3,     // seconds per horizontal sway cycle
