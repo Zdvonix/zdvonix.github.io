@@ -41,8 +41,8 @@ const CONFIG = {
   // ----------------------------------------------------------
   // DISCORD (static — no API, edit manually)
   // ----------------------------------------------------------
-  discordUsername: "This is a dellusion",
-  discordStatus:   "Is this a dellusion? Shit, I'm a schizo",
+  discordUsername: "This is a delusion",
+  discordStatus:   "Is this a delusion? Shit, I'm a schizo",
   discordAvatar:   "assets/discord-avatar.jpg",
   discordAvatarSize:   "74px",
   discordAvatarBorder: "2px solid rgba(255, 255, 255, 0.15)",
@@ -85,7 +85,7 @@ const CONFIG = {
   // ----------------------------------------------------------
   // COLORS / STYLE
   // ----------------------------------------------------------
-  usernameGlow: "0 0 16.5px #ffffff", // name glow ("none" to disable)
+  usernameGlow: "0 0 16.5px #1599ad", // name glow ("none" to disable)
 
   // ----------------------------------------------------------
   // BACKGROUND PARTICLES
